@@ -1,0 +1,44 @@
+.register-container {
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    width: 100%;
+  }
+  
+  .mat-raised-button {
+    margin-top: 20px;
+  }
+  
+  .subscription-card {
+    margin: 20px;
+  }
+  
+  .card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .free-plan {
+    background: linear-gradient(to right, #43e97b, #38f9d7);
+  }
+  
+  .paid-plan {
+    opacity: 0.6;
+  }
+  
+  .coming-soon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  

@@ -1,0 +1,107 @@
+<!-- Form Layout -->
+<div class="card">
+  <div class="card-body">
+    <h4 class="mb-32">New Estate From </h4>
+    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+      <mat-form-field class="w-100 fs-16" appearance="outline">
+        <mat-label>Headline</mat-label>
+        <input matInput type="text" name="headline" [(ngModel)]="estate.headline" required>
+      </mat-form-field>
+
+     <!-- Description -->
+     <mat-form-field class="w-100 fs-16" appearance="outline">
+      <mat-label>Description</mat-label>
+      <textarea matInput rows="6" name="description" [(ngModel)]="estate.description" required></textarea>
+    </mat-form-field>
+
+       <!-- Estate Type -->
+       <mat-form-field class="w-100 fs-16" appearance="outline">
+        <mat-label>Estate Type</mat-label>
+        <mat-select matInput name="estateType" [(ngModel)]="estate.estateType" required>
+          <mat-option *ngFor="let type of estateTypes" [value]="type.value">{{ type.viewValue }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+       <!-- Property Type -->
+       <mat-form-field class="w-100 fs-16" appearance="outline">
+        <mat-label>Property Type</mat-label>
+        <mat-select matInput name="propertyType" [(ngModel)]="estate.propertyType" required>
+          <mat-option *ngFor="let type of propertyTypes" [value]="type.value">{{ type.viewValue }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Number Of Rooms -->
+      <mat-form-field class="w-100 fs-16" appearance="outline">
+        <mat-label>Number Of Rooms</mat-label>
+        <input matInput type="number" name="numberOfBedRooms" [(ngModel)]="estate.numberOfBedRooms" required>
+      </mat-form-field>
+
+      <!-- Number Of Bathrooms -->
+      <mat-form-field class="w-100 fs-16" appearance="outline">
+        <mat-label>Number Of Bathrooms</mat-label>
+        <input matInput type="number" name="numberOfBathRooms" [(ngModel)]="estate.numberOfBathRooms" required>
+      </mat-form-field>
+
+      <!-- Square Meter -->
+      <mat-form-field class="w-100 fs-16" appearance="outline">
+        <mat-label>Square Meter</mat-label>
+        <input matInput type="number" name="squareMeter" [(ngModel)]="estate.squareMeter" required>
+      </mat-form-field>
+
+      <!-- Price -->
+      <mat-form-field class="w-100 fs-16" appearance="outline">
+        <mat-label>Price</mat-label>
+        <input matInput type="number" name="price" [(ngModel)]="estate.price" required>
+      </mat-form-field>
+
+      <!-- Features -->
+      <section class="fs-16 mb-32">
+        <mat-checkbox color="primary" name="balcony" [(ngModel)]="estate.balcony">Balcony</mat-checkbox>
+        <mat-checkbox class="op-7" name="garden" [(ngModel)]="estate.garden">Garden</mat-checkbox>
+      </section>
+
+      <!-- City -->
+      <mat-form-field class="w-100 fs-16" appearance="outline">
+        <mat-label>City</mat-label>
+        <input matInput type="text" name="city" [(ngModel)]="estate.city" required>
+      </mat-form-field>
+
+      <!-- Post Code -->
+      <mat-form-field class="w-100 fs-16" appearance="outline">
+        <mat-label>Post Code</mat-label>
+        <input matInput type="text" name="postCode" [(ngModel)]="estate.postCode" required>
+      </mat-form-field>
+
+       <!-- Estate Agents -->
+       <mat-form-field class="w-100 fs-16" appearance="outline">
+        <mat-label>Estate Agent</mat-label>
+        <mat-select matInput name="estateAgent" [(ngModel)]="estate.estateAgentId" >
+          <mat-option *ngFor="let agent of estateAgents" [value]="agent.id">{{ agent.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+     
+
+      <!-- Landlord Info -->
+      <mat-form-field class="w-100 fs-16" appearance="outline">
+        <mat-label>Landlord Name</mat-label>
+        <input matInput type="text" name="headline" [(ngModel)]="estate.landlordName" required>
+      </mat-form-field>
+
+      <mat-form-field class="w-100 fs-16" appearance="outline">
+        <mat-label>Landlord Phone</mat-label>
+        <input matInput type="text" name="headline" [(ngModel)]="estate.landlordPhone" required>
+      </mat-form-field>
+
+      <mat-form-field class="w-100 fs-16" appearance="outline">
+        <mat-label>Landlord Email</mat-label>
+        <input matInput type="text" name="headline" [(ngModel)]="estate.landlordEmail" required>
+      </mat-form-field>
+
+      <!-- Submit Button -->
+      <button mat-button class="btn btn-info fw-normal mt-16" type="submit">Submit</button>
+
+    </form>
+  </div>
+</div>
+
+

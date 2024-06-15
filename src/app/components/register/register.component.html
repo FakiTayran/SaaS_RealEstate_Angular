@@ -1,0 +1,70 @@
+<div class="register-container">
+    <h2 *ngIf="showPlans"> Subscription Plans</h2>
+    <div class="card-container" *ngIf="showPlans">
+      <mat-card class="subscription-card free-plan">
+        <mat-card-header>
+          <mat-card-title>Free Plan</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Add up to 5 properties</p>
+          <p>Add up to 2 estate agents</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" (click)="openRegisterForm()">Start Free</button>
+        </mat-card-actions>
+      </mat-card>
+      <mat-card class="subscription-card paid-plan coming-soon">
+        <mat-card-header>
+          <mat-card-title>Standard Plan</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Add up to 50 properties</p>
+          <p>Add up to 20 estate agents</p>
+          <p>£19.99 per month</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="accent" disabled>Coming Soon</button>
+        </mat-card-actions>
+      </mat-card>
+      <mat-card class="subscription-card paid-plan coming-soon">
+        <mat-card-header>
+          <mat-card-title>Premium Plan</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Unlimited properties</p>
+          <p>Unlimited estate agents</p>
+          <p>£99.99 per month</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="accent" disabled>Coming Soon</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  
+    <form *ngIf="registerFormVisible" [formGroup]="registerForm" (ngSubmit)="register()">
+      <h3>Register Your Company</h3>
+      <mat-form-field class="example-full-width">
+        <mat-label>Company Name</mat-label>
+        <input matInput formControlName="companyName" required>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Tax Number</mat-label>
+        <input matInput formControlName="taxNumber" required>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>First Estate Agent Username</mat-label>
+        <input matInput formControlName="username" required>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>First Estate Agent Password</mat-label>
+        <input matInput type="password" formControlName="password" required>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Confirm Password</mat-label>
+        <input matInput type="password" formControlName="confirmPassword" required>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit">Register</button>
+      <button mat-button type="button" (click)="close()">Cancel</button>
+    </form>
+  </div>
+  
