@@ -53,85 +53,16 @@ export class FullComponent implements OnInit {
       menu: "Dashboard",
     },
     {
-      link: "/button",
-      icon: "disc",
-      menu: "Buttons",
-    },
-    {
       link: "/forms",
-      icon: "layout",
-      menu: "Forms",
+      icon: "plus",
+      menu: "Add New Estate",
     },
     {
-      link: "/alerts",
-      icon: "info",
-      menu: "Alerts",
-    },
-    {
-      link: "/grid-list",
-      icon: "file-text",
-      menu: "Grid List",
-    },
-    {
-      link: "/menu",
-      icon: "menu",
-      menu: "Menus",
-    },
-    {
-      link: "/table",
-      icon: "grid",
-      menu: "Tables",
-    },
-    {
-      link: "/expansion",
-      icon: "divide-circle",
-      menu: "Expansion Panel",
-    },
-    {
-      link: "/chips",
-      icon: "award",
-      menu: "Chips",
-    },
-    {
-      link: "/tabs",
+      link: "/estateList",
       icon: "list",
-      menu: "Tabs",
+      menu: "Estate List",
     },
-    {
-      link: "/progress",
-      icon: "bar-chart-2",
-      menu: "Progress Bar",
-    },
-    {
-      link: "/toolbar",
-      icon: "voicemail",
-      menu: "Toolbar",
-    },
-    {
-      link: "/progress-snipper",
-      icon: "loader",
-      menu: "Progress Snipper",
-    },
-    {
-      link: "/tooltip",
-      icon: "bell",
-      menu: "Tooltip",
-    },
-    {
-      link: "/snackbar",
-      icon: "slack",
-      menu: "Snackbar",
-    },
-    {
-      link: "/slider",
-      icon: "sliders",
-      menu: "Slider",
-    },
-    {
-      link: "/slide-toggle",
-      icon: "layers",
-      menu: "Slide Toggle",
-    },
+    
   ]
 
 }

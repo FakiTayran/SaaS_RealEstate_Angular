@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatTableModule } from '@angular/material/table';
 
 export interface PeriodicElement {
   id: number;
@@ -17,20 +20,22 @@ const ELEMENT_DATA: PeriodicElement[] = [
   { id: 4, name: 'Maruti Makwana', work: 'Backend Devloper', project: 'Material Pro', priority: 'Critical', badge: 'badge-success', budget: '$2.4k' },
 ];
 
-
 @Component({
-  selector: 'app-product',
-  templateUrl: './product.component.html',
-  styleUrls: ['./product.component.scss']
+  selector: 'app-estate-list',
+  templateUrl: './estateList.component.html',
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatTableModule
+  ]
 })
-export class ProductComponent implements OnInit {
+export class EstateListComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'assigned', 'name', 'priority', 'budget'];
+  displayedColumns: string[] = ['id', 'name', 'work', 'project', 'priority', 'budget'];
   dataSource = ELEMENT_DATA;
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void { }
 }

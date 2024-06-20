@@ -13,12 +13,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FullComponent } from './layouts/full/full.component';
 import { DemoFlexyModule } from './demo-flexy-module';
-import { RegisterComponent } from './components/register/register.component'; // RegisterComponent import edin
 
 // Modules
 import { DashboardModule } from './dashboard/dashboard.module';
 import { ComponentsModule } from './components/components.module';
-import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -38,8 +36,7 @@ import { LoginComponent } from './components/login/login.component';
     MatStepperModule,
     MatDialogModule,
     MatCardModule,
-    HttpClientModule,
-    RegisterComponent // RegisterComponent standalone olduğu için burada ekleyin
+    HttpClientModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
