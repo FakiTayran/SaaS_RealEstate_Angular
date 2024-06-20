@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FeatherModule } from 'angular-feather';
 import { allIcons } from 'angular-feather/icons';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // ReactiveFormsModule ekleyin
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
@@ -38,7 +38,8 @@ import { LoginComponent } from './components/login/login.component';
     MatStepperModule,
     MatDialogModule,
     MatCardModule,
-    HttpClientModule
+    HttpClientModule,
+    RegisterComponent // RegisterComponent standalone olduğu için burada ekleyin
   ],
   providers: [],
   bootstrap: [AppComponent]

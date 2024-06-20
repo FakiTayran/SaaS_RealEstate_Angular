@@ -7,19 +7,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
-import { CommonModule } from '@angular/common'; // CommonModule'ü kullanın
-import { RegisterComponent } from '../register/register.component'; // RegisterComponent import edin
-import { environment } from '../../../environments/environment';
-
-interface LoginDto {
-  email: string;
-  password: string;
-}
-
-interface TokenResult {
-  access_token: string;
-  expires_in: number;
-}
+import { CommonModule } from '@angular/common';
+import { RegisterComponent } from '../register/register.component';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -40,27 +30,30 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
 
-  constructor(private http: HttpClient, private router: Router, public dialog: MatDialog) {}
+  constructor(private authService: AuthService, private router: Router, public dialog: MatDialog) {}
 
   login() {
-    const loginDto: LoginDto = {
-      email: this.email,
-      password: this.password
-    };
-
-    this.http.post<TokenResult>(`${environment.apiUrl}/Account/Login`, loginDto)
-      .subscribe(
-        (response) => {
-          localStorage.setItem('token', response.access_token);
-          this.router.navigate(['/home']);
-        },
-        (error) => {
-          console.error('Login failed', error);
-        }
-      );
+    this.authService.login(this.email, this.password).subscribe(
+      (response) => {
+        localStorage.setItem('access_token', response.access_token);
+        localStorage.setItem("company_name",response.companyName);
+        localStorage.setItem("company_id",response.companyId);
+        localStorage.setItem("company_icon",response.companyIcon);
+        localStorage.setItem("user_name",response.userName);
+        localStorage.setItem("user_pp",response.userPP);
+        this.router.navigate(['/home']); // Yönlendirme işlemi
+      },
+      (error) => {
+        console.error('Login failed', error);
+      }
+    );
   }
 
   openRegisterDialog() {
-    this.dialog.open(RegisterComponent);
+    const dialogRef = this.dialog.open(RegisterComponent);
+
+    dialogRef.afterClosed().subscribe(() => {
+      // RegisterComponent kapandıktan sonra login formunu tekrar görünür yapabilirsiniz
+    });
   }
 }

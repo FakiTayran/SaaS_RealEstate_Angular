@@ -18,15 +18,17 @@ import { TooltipsComponent } from './components/tooltips/tooltips.component';
 import { ProductComponent } from './dashboard/dashboard-components/product/product.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FullComponent } from './layouts/full/full.component';
-import { LoginComponent } from './components/login/login.component'; // LoginComponent import edin
-import { AuthGuard } from './guards/auth.guard'; // AuthGuard'ı import edin
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent }, // Login rotasını önce ekleyin
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   {
     path: '',
     component: FullComponent,
-    canActivate: [AuthGuard], // FullComponent için AuthGuard ekleyin
+    canActivateChild: [AuthGuard], // Tüm çocuk rotalar için AuthGuard ekleyin
     children: [
       { path: '', redirectTo: '/home', pathMatch: 'full' },
       { path: 'home', component: DashboardComponent },
@@ -48,7 +50,7 @@ const routes: Routes = [
       { path: 'button', component: ButtonsComponent },
     ]
   },
-  { path: '**', redirectTo: '/home', pathMatch: 'full' } // canActivate'i kaldırın
+  { path: '**', redirectTo: '/home', pathMatch: 'full' }
 ];
 
 @NgModule({

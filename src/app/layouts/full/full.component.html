@@ -7,9 +7,9 @@
     <div class="p-16">
       <div class="mb-16">
         <a href="javascript:void(0)" class="d-flex align-items-center">
-          <img src="assets/images/favicon.svg" alt=""> <span class="ms-16 fw-medium fs-26">Flexy</span>
+          <img [src]="companyIcon || 'assets/images/favicon.png'" alt="Company Icon" width="32" height="32"> 
+          <span class="ms-16 fw-medium fs-26">{{ companyName || 'Flexy' }}</span>
         </a>
-
       </div>
 
       <div class="pt-8">
@@ -60,9 +60,9 @@
       <div class="ms-auto">
         <button mat-button class="fs-16 pt-4 pb-4 ps-8 pe-8 text-light-muted d-flex align-items-center" [matMenuTriggerFor]="menu">
           <div class="d-flex align-items-center">
-            <img src="assets/images/user2.webp" class="rounded-circle" alt="">
+            <img [src]="userPP || 'assets/images/user2.png'" class="rounded-circle" alt="User Image" width="32" height="32">
             <span class="fw-light ms-8 text-secondary">Hi,</span>
-            <span class="fw-bold ms-8">Julia</span>
+            <span class="fw-bold ms-8">{{ userName ? userName.split('@')[0] : 'User' }}</span>
             <i-feather name="chevron-down" class="feather-base"></i-feather>
           </div>
         </button>
@@ -92,8 +92,8 @@
     </div>
 
     <p class="text-center pb-24 fs-16">© 2024 All rights reserved by <a
-        href="https://www.wrappixel.com/templates/category/free-angular-templates/" target="_blank"
-        class="text-indigo">Wrappixel.com</a></p>
+        href="www.github.com/fakitayran" target="_blank"
+        class="text-indigo">fakitayran</a></p>
 
   </mat-sidenav-content>
 

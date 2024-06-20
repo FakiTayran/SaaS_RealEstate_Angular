@@ -1,6 +1,43 @@
-<div class="register-container">
-    <h2 *ngIf="showPlans"> Subscription Plans</h2>
-    <div class="card-container" *ngIf="showPlans">
+<div class="container">
+  <div *ngIf="registerFormVisible" class="register-container">
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
+      <h3>Register Your Company</h3>
+      <mat-form-field class="example-full-width">
+        <mat-label>Company Name</mat-label>
+        <input matInput formControlName="companyName" required>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Tax Number</mat-label>
+        <input matInput formControlName="taxNumber" required>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" required>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Surname</mat-label>
+        <input matInput formControlName="surname" required>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" required>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password" required>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Confirm Password</mat-label>
+        <input matInput type="password" formControlName="confirmPassword" required>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit">Register</button>
+      <button mat-button type="button" (click)="close()">Cancel</button>
+    </form>
+  </div>
+
+  <div *ngIf="showPlans" class="subscription-section">
+    <h2 class="subscription-title">Subscription Plans</h2>
+    <div class="card-container">
       <mat-card class="subscription-card free-plan">
         <mat-card-header>
           <mat-card-title>Free Plan</mat-card-title>
@@ -13,7 +50,7 @@
           <button mat-raised-button color="primary" (click)="openRegisterForm()">Start Free</button>
         </mat-card-actions>
       </mat-card>
-      <mat-card class="subscription-card paid-plan coming-soon">
+      <mat-card class="subscription-card standard-plan">
         <mat-card-header>
           <mat-card-title>Standard Plan</mat-card-title>
         </mat-card-header>
@@ -26,7 +63,7 @@
           <button mat-raised-button color="accent" disabled>Coming Soon</button>
         </mat-card-actions>
       </mat-card>
-      <mat-card class="subscription-card paid-plan coming-soon">
+      <mat-card class="subscription-card premium-plan">
         <mat-card-header>
           <mat-card-title>Premium Plan</mat-card-title>
         </mat-card-header>
@@ -40,31 +77,5 @@
         </mat-card-actions>
       </mat-card>
     </div>
-  
-    <form *ngIf="registerFormVisible" [formGroup]="registerForm" (ngSubmit)="register()">
-      <h3>Register Your Company</h3>
-      <mat-form-field class="example-full-width">
-        <mat-label>Company Name</mat-label>
-        <input matInput formControlName="companyName" required>
-      </mat-form-field>
-      <mat-form-field class="example-full-width">
-        <mat-label>Tax Number</mat-label>
-        <input matInput formControlName="taxNumber" required>
-      </mat-form-field>
-      <mat-form-field class="example-full-width">
-        <mat-label>First Estate Agent Username</mat-label>
-        <input matInput formControlName="username" required>
-      </mat-form-field>
-      <mat-form-field class="example-full-width">
-        <mat-label>First Estate Agent Password</mat-label>
-        <input matInput type="password" formControlName="password" required>
-      </mat-form-field>
-      <mat-form-field class="example-full-width">
-        <mat-label>Confirm Password</mat-label>
-        <input matInput type="password" formControlName="confirmPassword" required>
-      </mat-form-field>
-      <button mat-raised-button color="primary" type="submit">Register</button>
-      <button mat-button type="button" (click)="close()">Cancel</button>
-    </form>
   </div>
-  
+</div>
