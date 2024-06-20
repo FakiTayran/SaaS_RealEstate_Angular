@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FeatherModule } from 'angular-feather';
 import { allIcons } from 'angular-feather/icons';
-import { FormsComponent } from './forms/forms.component';
+import { AddEstateComponent } from './addEstate/addEstate.component';
 import { DemoFlexyModule } from '../demo-flexy-module';
 import { FormsModule } from '@angular/forms';
 import { EstateListComponent } from './estateList/estateList.component';
@@ -15,14 +15,14 @@ import { LoginComponent } from './login/login.component';
     CommonModule,
     FeatherModule.pick(allIcons),
     DemoFlexyModule,
-    FormsComponent,
+    AddEstateComponent,
     FormsModule,
     EstateListComponent,
     RegisterComponent,
     LoginComponent
   ],
   exports: [
-    FormsComponent,
+    AddEstateComponent,
     EstateListComponent,
     RegisterComponent,
     LoginComponent

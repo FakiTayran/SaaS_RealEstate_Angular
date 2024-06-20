@@ -53,7 +53,7 @@ export class FullComponent implements OnInit {
       menu: "Dashboard",
     },
     {
-      link: "/forms",
+      link: "/addEstate",
       icon: "plus",
       menu: "Add New Estate",
     },

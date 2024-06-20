@@ -36,9 +36,9 @@ import { EstateAgent } from '../../models/estateAgent.model'; // Import EstateAg
     MatExpansionModule, // MatExpansionModule import edildi
     MatCardModule, // MatCardModule import edildi
   ],
-  templateUrl: './forms.component.html',
+  templateUrl: './addEstate.component.html',
 })
-export class FormsComponent implements OnInit {
+export class AddEstateComponent implements OnInit {
   estate: Estate = new Estate();
 
   estateTypes = [
