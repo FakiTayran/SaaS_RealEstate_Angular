@@ -1,0 +1,110 @@
+<mat-dialog-content>
+    <form [formGroup]="editForm">
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Basic Information</mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-form-field class="w-100">
+            <mat-label>Headline</mat-label>
+            <input matInput formControlName="headline">
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName="description"></textarea>
+          </mat-form-field>
+        </mat-expansion-panel>
+  
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Property Details</mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-form-field class="w-100">
+            <mat-label>Estate Type</mat-label>
+            <mat-select formControlName="estateType">
+              <mat-option *ngFor="let type of estateTypes" [value]="type">
+                {{ getEstateTypeLabel(type) }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>Property Type</mat-label>
+            <mat-select formControlName="propertyType">
+              <mat-option *ngFor="let type of propertyTypes" [value]="type">
+                {{ getPropertyTypeLabel(type) }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>Number Of Rooms</mat-label>
+            <input matInput type="number" formControlName="numberOfBedRooms">
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>Number Of Bathrooms</mat-label>
+            <input matInput type="number" formControlName="numberOfBathRooms">
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>Square Meter</mat-label>
+            <input matInput type="number" formControlName="squareMeter">
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>Price</mat-label>
+            <input matInput type="number" formControlName="price">
+          </mat-form-field>
+          <mat-checkbox formControlName="garden">Garden</mat-checkbox>
+          <mat-checkbox formControlName="balcony">Balcony</mat-checkbox>
+        </mat-expansion-panel>
+  
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Location Details</mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-form-field class="w-100">
+            <mat-label>City</mat-label>
+            <input matInput formControlName="city">
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>Post Code</mat-label>
+            <input matInput formControlName="postCode">
+          </mat-form-field>
+        </mat-expansion-panel>
+  
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Landlord Information</mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-form-field class="w-100">
+            <mat-label>Landlord Name</mat-label>
+            <input matInput formControlName="landLordName">
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>Landlord Phone</mat-label>
+            <input matInput formControlName="landLordPhone">
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>Landlord Email</mat-label>
+            <input matInput formControlName="landLordEmail">
+          </mat-form-field>
+        </mat-expansion-panel>
+  
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Estate Agent</mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-form-field class="w-100">
+            <mat-label>Estate Agent</mat-label>
+            <mat-select formControlName="estateAgentId">
+              <mat-option *ngFor="let agent of estateAgents" [value]="agent.id">
+                {{ agent.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button color="primary" (click)="save()">Save</button>
+    <button mat-raised-button (click)="close()">Cancel</button>
+  </mat-dialog-actions>
+  

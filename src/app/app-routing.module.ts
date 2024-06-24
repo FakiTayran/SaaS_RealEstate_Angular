@@ -7,6 +7,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { EstateListComponent } from './components/estateList/estateList.component'; // Import EstateListComponent
 import { AuthGuard } from './guards/auth.guard';
+import { EditEstateComponent } from './components/editEstate/editEstate.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent }, // Login rotası
@@ -19,6 +20,7 @@ const routes: Routes = [
       { path: '', redirectTo: '/home', pathMatch: 'full' },
       { path: 'home', component: DashboardComponent },
       { path: 'addEstate', component: AddEstateComponent },
+      { path: 'editEstate', component: EditEstateComponent },
       { path: 'estateList', component: EstateListComponent }, 
     ]
   },

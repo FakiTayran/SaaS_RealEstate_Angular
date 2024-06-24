@@ -1,7 +1,181 @@
-<!-- Daily Activity -->
-<mat-card class="w-100">
-    <mat-card-content>
-      <h4 class="mb-56">Estate List</h4>
-  
-    </mat-card-content>
-  </mat-card>
+<mat-card>
+  <mat-card-content>
+    <mat-card-title>Estate List </mat-card-title>
+    <br>
+    <br>
+    <mat-card-title>Filter</mat-card-title>
+
+    <div class="container">
+      <div class="filter-section">
+        <form [formGroup]="filterForm" (ngSubmit)="applyFilter()">
+          <mat-form-field>
+            <mat-label>Search Text</mat-label>
+            <input matInput formControlName="searchText">
+          </mat-form-field>
+          <mat-accordion>
+            <!-- Price and Square Meter Range -->
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>Price and Square Meter Range</mat-panel-title>
+              </mat-expansion-panel-header>
+              <div class="slider-container">
+                <div class="slider-label">Price Range</div>
+                <mat-slider min="0" max="10000" step="10" thumbLabel discrete [displayWith]="formatPriceLabel">
+                  <input matSliderStartThumb formControlName="minPrice">
+                  <input matSliderEndThumb formControlName="maxPrice">
+                </mat-slider>
+              </div>
+              <br>
+              <div class="slider-container">
+                <div class="slider-label">Square Meter Range</div>
+                <mat-slider min="0" max="200" step="5" thumbLabel discrete [displayWith]="formatSquareMeterLabel">
+                  <input matSliderStartThumb formControlName="minSquareMeter">
+                  <input matSliderEndThumb formControlName="maxSquareMeter">
+                </mat-slider>
+              </div>
+            </mat-expansion-panel>
+
+            <!-- Property Details -->
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>Property Details</mat-panel-title>
+              </mat-expansion-panel-header>
+              <mat-form-field>
+                <mat-label>Estate Type</mat-label>
+                <mat-select formControlName="estateType">
+                  <mat-option *ngFor="let type of estateTypes" [value]="type">
+                    {{ type }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <br>
+              <mat-form-field>
+                <mat-label>Property Type</mat-label>
+                <mat-select formControlName="propertyType">
+                  <mat-option *ngFor="let type of propertyTypes" [value]="type">
+                    {{ type }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <br>
+              <mat-form-field>
+                <mat-label>Number Of Rooms</mat-label>
+                <input matInput type="number" formControlName="numberOfBedRooms">
+              </mat-form-field>
+              <br>
+              <mat-form-field>
+                <mat-label>Number Of Bathrooms</mat-label>
+                <input matInput type="number" formControlName="numberOfBathRooms">
+              </mat-form-field>
+              <br>
+              <mat-checkbox formControlName="garden">Garden</mat-checkbox>
+              <br>
+              <mat-checkbox formControlName="balcony">Balcony</mat-checkbox>
+              <br>
+            </mat-expansion-panel>
+
+            <!-- Location Details -->
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>Location Details</mat-panel-title>
+              </mat-expansion-panel-header>
+              <mat-form-field>
+                <mat-label>City</mat-label>
+                <input matInput formControlName="city">
+              </mat-form-field>
+              <br>
+              <mat-form-field>
+                <mat-label>Post Code</mat-label>
+                <input matInput formControlName="postCode">
+              </mat-form-field>
+              <br>
+            </mat-expansion-panel>
+
+            <!-- Estate Agent and Search Text -->
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>Estate Agent</mat-panel-title>
+              </mat-expansion-panel-header>
+              <mat-form-field>
+                <mat-label>Estate Agent</mat-label>
+                <mat-select formControlName="estateAgentId">
+                  <mat-option *ngFor="let agent of estateAgents" [value]="agent.id">
+                    {{ agent.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              
+              <br>
+            </mat-expansion-panel>
+
+            <!-- Submit Button -->
+            <mat-action-row>
+              <button mat-raised-button color="primary" type="submit">Apply Filter</button>
+            </mat-action-row>
+          </mat-accordion>
+        </form>
+      </div>
+      <div class="table-section">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matPaginator>
+          <!-- Headline Column -->
+          <ng-container matColumnDef="headline">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Headline </th>
+            <td mat-cell *matCellDef="let element"> {{element.headline}} </td>
+          </ng-container>
+
+          <!-- Price Column -->
+          <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
+            <td mat-cell *matCellDef="let element"> {{element.price | currency:'GBP':'symbol' }} </td>
+          </ng-container>
+
+          <!-- Square Meter Column -->
+          <ng-container matColumnDef="squareMeter">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Square Meter </th>
+            <td mat-cell *matCellDef="let element"> {{element.squareMeter}} </td>
+          </ng-container>
+
+          <!-- Number of Bedrooms Column -->
+          <ng-container matColumnDef="numberOfBedRooms">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Bedrooms </th>
+            <td mat-cell *matCellDef="let element"> {{element.numberOfBedRooms}} </td>
+          </ng-container>
+
+          <!-- Number of Bathrooms Column -->
+          <ng-container matColumnDef="numberOfBathRooms">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Bathrooms </th>
+            <td mat-cell *matCellDef="let element"> {{element.numberOfBathRooms}} </td>
+          </ng-container>
+
+          <!-- City Column -->
+          <ng-container matColumnDef="city">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> City </th>
+            <td mat-cell *matCellDef="let element"> {{element.city}} </td>
+          </ng-container>
+
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-icon-button color="primary" (click)="editEstate(element)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" (click)="addPhotoEstate(element)">
+                <mat-icon>add_a_photo</mat-icon>
+              </button>
+              <button mat-icon-button color="accent" (click)="viewDetails(element)">
+                <mat-icon>visibility</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" (click)="deleteEstate(element)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

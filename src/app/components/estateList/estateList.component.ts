@@ -1,41 +1,139 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MatCardModule } from '@angular/material/card';
-import { MatTableModule } from '@angular/material/table';
-
-export interface PeriodicElement {
-  id: number;
-  name: string;
-  work: string;
-  project: string;
-  priority: string;
-  badge: string;
-  budget: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  { id: 1, name: 'Deep Javiya', work: 'Frontend Devloper', project: 'Flexy Angular', priority: 'Low', badge: 'badge-info', budget: '$3.9k' },
-  { id: 2, name: 'Nirav Joshi', work: 'Project Manager', project: 'Hosting Press HTML', priority: 'Medium', badge: 'badge-primary', budget: '$24.5k' },
-  { id: 3, name: 'Sunil Joshi', work: 'Web Designer', project: 'Elite Admin', priority: 'High', badge: 'badge-danger', budget: '$12.8k' },
-  { id: 4, name: 'Maruti Makwana', work: 'Backend Devloper', project: 'Material Pro', priority: 'Critical', badge: 'badge-success', budget: '$2.4k' },
-];
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material/table';
+import { EstateService } from '../../services/estate.service';
+import { Estate, EstateType, PropertyType } from '../../models/estate.model';
+import { EstateAgentService } from '../../services/estateAgent.service'; 
+import { EstateAgent } from '../../models/estateAgent.model'; 
+import { EditEstateComponent } from '../editEstate/editEstate.component';
+import { DetailEstateComponent } from '../detailEstate/detailEstate.component';
+import { AddEstatePhotoComponent } from '../addPhoto/addEstatePhoto.component';
+import { ConfirmDialogComponent } from '../confirmDialog/confirmDialog.component';
 
 @Component({
   selector: 'app-estate-list',
   templateUrl: './estateList.component.html',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MatCardModule,
-    MatTableModule
-  ]
+  styleUrls: ['./estateList.component.css']
 })
 export class EstateListComponent implements OnInit {
+  displayedColumns: string[] = ['headline', 'price', 'squareMeter', 'numberOfBedRooms', 'numberOfBathRooms', 'city', 'actions'];
+  dataSource = new MatTableDataSource<Estate>();
+  filterForm: FormGroup;
+  estateAgents: EstateAgent[] = []; 
+  estateTypes = Object.values(EstateType).filter(value => typeof value === 'number');
+  propertyTypes = Object.values(PropertyType).filter(value => typeof value === 'number');
 
-  displayedColumns: string[] = ['id', 'name', 'work', 'project', 'priority', 'budget'];
-  dataSource = ELEMENT_DATA;
+  constructor(private fb: FormBuilder, private estateService: EstateService, private estateAgentService: EstateAgentService, private snackBar: MatSnackBar, public dialog: MatDialog) {
+    this.filterForm = this.fb.group({
+      searchText: [''],
+      minPrice: [null],
+      maxPrice: [null],
+      minSquareMeter: [null],
+      maxSquareMeter: [null],
+      estateType: [null],
+      propertyType: [null],
+      numberOfBedRooms: [null],
+      numberOfBathRooms: [null],
+      garden: [false],
+      balcony: [false],
+      city: [null],
+      postCode: [null],
+      estateAgentId: [null]
+    });
+  }
 
-  constructor() { }
+  ngOnInit(): void {
+    this.getEstateAgents();
+    this.getEstates();
+  }
 
-  ngOnInit(): void { }
+  getEstateAgents(): void {
+    this.estateAgentService.getEstateAgents().subscribe(data => {
+      this.estateAgents = data;
+    });
+  }
+
+  getEstates(filters: any = {}): void {
+    Object.keys(this.filterForm.controls).forEach(key => {
+      const controlValue = this.filterForm.get(key)?.value;
+      if (controlValue !== null && controlValue !== '') {
+        filters[key] = controlValue;
+      }
+    });
+
+    this.estateService.getAllEstates(filters).subscribe(data => {
+      this.dataSource.data = data;
+    });
+  }
+
+  applyFilter() {
+    this.getEstates(this.filterForm.value);
+  }
+
+  editEstate(estate: Estate) {
+    const dialogRef = this.dialog.open(EditEstateComponent, {
+      width: '600px',
+      data: { estate }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.getEstates();
+        this.snackBar.open('Estate updated successfully', 'Close', {
+          duration: 3000,
+        });
+      }
+    });
+  }
+
+  viewDetails(estate: Estate) {
+    this.dialog.open(DetailEstateComponent, {
+      width: '800px',
+      data: { estate }
+    });
+  }
+
+  addPhotoEstate(estate: Estate) {
+    const dialogRef = this.dialog.open(AddEstatePhotoComponent, {
+      width: '600px',
+      data: { estate }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.getEstates();
+        this.snackBar.open('Photos added successfully', 'Close', {
+          duration: 3000,
+        });
+      }
+    });
+  }
+
+  deleteEstate(estate: Estate) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '400px',
+      data: { message: `Are you sure you want to delete the estate "${estate.headline}"?` }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.estateService.deleteEstate(estate.id).subscribe(() => {
+          this.getEstates();
+          this.snackBar.open('Estate deleted successfully', 'Close', {
+            duration: 3000,
+          });
+        });
+      }
+    });
+  }
+
+  formatPriceLabel(value: number): string {
+    return `£${value}`;
+  }
+
+  formatSquareMeterLabel(value: number): string {
+    return `${value} m²`;
+  }
 }

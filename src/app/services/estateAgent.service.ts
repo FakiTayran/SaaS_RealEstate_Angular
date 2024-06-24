@@ -10,14 +10,17 @@ import { EstateAgent } from '../models/estateAgent.model';
 })
 export class EstateAgentService {
 
-  private apiUrl = `${environment.apiUrl}/Account/`; 
+  private apiUrl = `${environment.apiUrl}/Account`; 
 
   constructor(private http: HttpClient) {}
 
   saveEstateAgents(estateAgent: EstateAgent): Observable<any> {
-    return this.http.post<any>(this.apiUrl + "Register", estateAgent);
+    return this.http.post<any>(this.apiUrl + "/Register", estateAgent);
   }
 
-  getEstateAgents(estateCompanyId: number): Observable<EstateAgent[]> {
-    return this.http.get<EstateAgent[]>(this.apiUrl + "GetAllAgents/" + estateCompanyId);
-  }}
+  getEstateAgents(): Observable<EstateAgent[]> {
+    var estateCompanyId = localStorage.getItem("company_id")
+    console.log(estateCompanyId);
+    return this.http.get<EstateAgent[]>(`${this.apiUrl}/GetAllAgents/${estateCompanyId}`);
+  }
+}

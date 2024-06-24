@@ -1,0 +1,28 @@
+<mat-dialog-content>
+  <h1 mat-dialog-title>{{ estate.headline }}</h1>
+  <div class="carousel">
+    <img [src]="getImageUrl()" alt="Estate Picture" class="carousel-image">
+    <div class="carousel-controls">
+      <button mat-icon-button (click)="previousImage()" [disabled]="currentImageIndex === 0">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+      <button mat-icon-button (click)="nextImage()" [disabled]="currentImageIndex === estate.estatePictures.length - 1">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div>
+    <p>{{ estate.description }}</p>
+    <p><strong>Price:</strong> {{ estate.price | currency:'GBP':'symbol' }}</p>
+    <p><strong>City:</strong> {{ estate.city }}</p>
+    <p><strong>Post Code:</strong> {{ estate.postCode }}</p>
+    <p><strong>Bedrooms:</strong> {{ estate.numberOfBedRooms }}</p>
+    <p><strong>Bathrooms:</strong> {{ estate.numberOfBathRooms }}</p>
+    <p><strong>Square Meter:</strong> {{ estate.squareMeter }}</p>
+    <p><strong>Garden:</strong> {{ estate.garden ? 'Yes' : 'No' }}</p>
+    <p><strong>Balcony:</strong> {{ estate.balcony ? 'Yes' : 'No' }}</p>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="close()">Close</button>
+  </div>
+</mat-dialog-content>
