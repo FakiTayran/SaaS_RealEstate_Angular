@@ -38,7 +38,7 @@
         </button>
         <div class="carousel-images">
           <img *ngFor="let photo of data.estate.estatePictures; let i = index" 
-               [src]="'data:image/jpeg;base64,' + photo" 
+               [src]="'data:image/jpeg;base64,' + photo.img" 
                [class.active]="i === currentSlide" 
                class="carousel-image">
         </div>

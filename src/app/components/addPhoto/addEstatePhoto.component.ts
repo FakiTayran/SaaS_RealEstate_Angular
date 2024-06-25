@@ -26,7 +26,9 @@ export class AddEstatePhotoComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.data.estate)
+  }
 
   onSelect(event: any): void {
     this.files.push(...event.addedFiles);
@@ -36,6 +38,23 @@ export class AddEstatePhotoComponent implements OnInit {
     this.files.splice(this.files.indexOf(file), 1);
   }
 
+  removePhoto(photoId: number, index: number): void {
+    console.log(photoId)
+    this.estateService.deleteEstatePhoto(photoId).subscribe(
+      () => {
+        this.data.estate.estatePictures.splice(index, 1);
+        this.snackBar.open('Photo removed successfully', '', {
+          duration: 3000,
+        });
+      },
+      (error) => {
+        this.snackBar.open('There was an error removing the photo', 'Close', {
+          duration: 3000,
+        });
+      }
+    );
+  }
+
   save(): void {
     if (this.files.length > 0) {
       const formData = new FormData();
@@ -43,15 +62,13 @@ export class AddEstatePhotoComponent implements OnInit {
         formData.append('photos', file, file.name);
       }
       this.estateService.addEstatePhotos(this.data.estate.id, formData).subscribe(
-        (response) => {
-          console.log('Response:', response);
+        () => {
           this.dialogRef.close(true);
           this.snackBar.open('Photos added successfully', 'Close', {
             duration: 3000,
           });
         },
         (error) => {
-          console.error('Error:', error);
           this.snackBar.open('There was an error uploading the photos', 'Close', {
             duration: 3000,
           });

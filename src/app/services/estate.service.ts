@@ -11,12 +11,12 @@ import { catchError } from 'rxjs/operators';
 })
 export class EstateService {
   private apiUrl = `${environment.apiUrl}`;
+  private token = localStorage.getItem('access_token');
 
   constructor(private http: HttpClient) {}
 
   getAllEstates(filters: any): Observable<Estate[]> {
-    const token = localStorage.getItem('access_token');
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
     let params = new HttpParams();
     for (const key in filters) {
       if (filters[key]) {
@@ -27,8 +27,7 @@ export class EstateService {
   }
 
   saveEstate(estate: Estate): Observable<any> {
-    const token = localStorage.getItem('access_token');
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
     const estateCompanyId = localStorage.getItem('company_id');
     if (estateCompanyId) {
       estate.realEstateCompanyId = parseInt(estateCompanyId, 10);
@@ -37,10 +36,9 @@ export class EstateService {
   }
 
   editEstate(estate: Estate): Observable<any> {
-    const token = localStorage.getItem('access_token');
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+      'Authorization': `Bearer ${this.token}`
     });
     const estateCompanyId = localStorage.getItem('company_id');
     if (estateCompanyId) {
@@ -50,22 +48,19 @@ export class EstateService {
   }
 
   deleteEstate(estateId: number): Observable<any> {
-    const token = localStorage.getItem('access_token');
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
     return this.http.delete<any>(`${this.apiUrl}/DeleteEstate/${estateId}`, { headers });
   }
 
   getEstateDetail(estateId: number): Observable<Estate> {
-    const token = localStorage.getItem('access_token');
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
     return this.http.get<Estate>(`${this.apiUrl}/GetEstateDetail/${estateId}`, { headers });
   }
 
   
 
   addEstatePhotos(estateId: number, formData: FormData): Observable<any> {
-    const token = localStorage.getItem('access_token');
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
     return this.http.post(`${this.apiUrl}/AddEstatePhotos/${estateId}`, formData, { responseType: 'text' ,headers})
       .pipe(
         catchError(error => {
@@ -74,4 +69,10 @@ export class EstateService {
         })
       );
   }
+
+  deleteEstatePhoto(photoId: number): Observable<void> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+    return this.http.delete<void>(`${this.apiUrl}/DeleteEstatePhoto/${photoId}`,{headers});
+  }
+  
 }
