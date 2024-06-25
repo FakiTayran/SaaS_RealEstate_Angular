@@ -18,11 +18,18 @@ export class EstateService {
   getAllEstates(filters: any): Observable<Estate[]> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
     let params = new HttpParams();
+    
+    const realEstateCompanyId = localStorage.getItem('company_id'); // it must be send for individual private data.
+    if (realEstateCompanyId) {
+      filters['realEstateCompanyId'] = realEstateCompanyId;
+    }
+
     for (const key in filters) {
       if (filters[key]) {
         params = params.set(key, filters[key]);
       }
     }
+    
     return this.http.get<Estate[]>(`${this.apiUrl}/GetEstates`, { headers, params });
   }
 

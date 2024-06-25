@@ -1,0 +1,23 @@
+<div class="container">
+    <h2>Add New Estate Agent</h2>
+    <form (ngSubmit)="onSubmit()" #estateAgentForm="ngForm">
+      <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput type="text" required [(ngModel)]="estateAgent.name" name="name" #name="ngModel">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Surname</mat-label>
+        <input matInput type="text" required [(ngModel)]="estateAgent.surname" name="name" #surname="ngModel">
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" required [(ngModel)]="estateAgent.email" name="email" #email="ngModel">
+      </mat-form-field>
+  
+      <button mat-raised-button color="primary" type="submit" [disabled]="!estateAgentForm.form.valid">Add Estate Agent</button>
+    </form>
+    
+  </div>
+  

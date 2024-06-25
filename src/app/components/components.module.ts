@@ -31,6 +31,8 @@ import { ConfirmDialogComponent } from './confirmDialog/confirmDialog.component'
 import { AddEstateComponent } from './addEstate/addEstate.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { AddEstateAgentComponent } from './addEstateAgent/addEstateAgent.component';
+import { EstateAgentListComponent } from './estateAgentList/estateAgentList.component';
 
 
 @NgModule({
@@ -39,6 +41,8 @@ import { LoginComponent } from './login/login.component';
     EstateListComponent,
     DetailEstateComponent,
     AddEstatePhotoComponent,
+    AddEstateAgentComponent,
+    EstateAgentListComponent,
     SafePipe,
     ConfirmDialogComponent,
   ],
@@ -73,6 +77,7 @@ import { LoginComponent } from './login/login.component';
     DetailEstateComponent,
     AddEstatePhotoComponent,
     ConfirmDialogComponent,
+    EstateAgentListComponent,
   ]
 })
 export class ComponentsModule { }

@@ -62,6 +62,16 @@ export class FullComponent implements OnInit {
       icon: "list",
       menu: "Estate List",
     },
+    {
+      link: "/addAgent",
+      icon: "plus",
+      menu: "Add Estate Agent",
+    },
+    {
+      link: "/agentList",
+      icon: "list",
+      menu: "Estate Agent List",
+    },
     
   ]
 
