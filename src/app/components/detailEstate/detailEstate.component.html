@@ -1,28 +1,54 @@
 <mat-dialog-content>
-  <h1 mat-dialog-title>{{ estate.headline }}</h1>
-  <div class="carousel">
-    <img [src]="getImageUrl()" alt="Estate Picture" class="carousel-image">
-    <div class="carousel-controls">
-      <button mat-icon-button (click)="previousImage()" [disabled]="currentImageIndex === 0">
-        <mat-icon>chevron_left</mat-icon>
-      </button>
-      <button mat-icon-button (click)="nextImage()" [disabled]="currentImageIndex === estate.estatePictures.length - 1">
-        <mat-icon>chevron_right</mat-icon>
-      </button>
+  <h1 mat-dialog-title>{{ data.estate.headline }}</h1>
+  <div class="container">
+    <div class="details">
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Basic Information</mat-panel-title>
+          </mat-expansion-panel-header>
+          <p><strong>Description:</strong> {{ data.estate.description }}</p>
+          <p><strong>City:</strong> {{ data.estate.city }}</p>
+          <p><strong>Post Code:</strong> {{ data.estate.postCode }}</p>
+          <p><strong>Landlord Name:</strong> {{ data.estate.landLordName }}</p>
+          <p><strong>Landlord Phone:</strong> {{ data.estate.landLordPhone }}</p>
+          <p><strong>Landlord Email:</strong> {{ data.estate.landLordEmail }}</p>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Property Details</mat-panel-title>
+          </mat-expansion-panel-header>
+          <p><strong>Estate Type:</strong> {{ getEstateTypeLabel(data.estate.estateType) }}</p>
+          <p><strong>Property Type:</strong> {{ getPropertyTypeLabel(data.estate.propertyType) }}</p>
+          <p><strong>Number Of Rooms:</strong> {{ data.estate.numberOfBedRooms }}</p>
+          <p><strong>Number Of Bathrooms:</strong> {{ data.estate.numberOfBathRooms }}</p>
+          <p><strong>Square Meter:</strong> {{ data.estate.squareMeter }} m²</p>
+          <p><strong>Price:</strong> £{{ data.estate.price }}</p>
+          <p><strong>Balcony:</strong> {{ data.estate.balcony ? 'Yes' : 'No' }}</p>
+          <p><strong>Garden:</strong> {{ data.estate.garden ? 'Yes' : 'No' }}</p>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <div class="photos">
+      <h2>Photos</h2>
+      <div class="carousel">
+        <button mat-icon-button (click)="prevSlide()">
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+        <div class="carousel-images">
+          <img *ngFor="let photo of data.estate.estatePictures; let i = index" 
+               [src]="'data:image/jpeg;base64,' + photo" 
+               [class.active]="i === currentSlide" 
+               class="carousel-image">
+        </div>
+        <button mat-icon-button (click)="nextSlide()">
+          <mat-icon>chevron_right</mat-icon>
+        </button>
+      </div>
     </div>
   </div>
-  <div>
-    <p>{{ estate.description }}</p>
-    <p><strong>Price:</strong> {{ estate.price | currency:'GBP':'symbol' }}</p>
-    <p><strong>City:</strong> {{ estate.city }}</p>
-    <p><strong>Post Code:</strong> {{ estate.postCode }}</p>
-    <p><strong>Bedrooms:</strong> {{ estate.numberOfBedRooms }}</p>
-    <p><strong>Bathrooms:</strong> {{ estate.numberOfBathRooms }}</p>
-    <p><strong>Square Meter:</strong> {{ estate.squareMeter }}</p>
-    <p><strong>Garden:</strong> {{ estate.garden ? 'Yes' : 'No' }}</p>
-    <p><strong>Balcony:</strong> {{ estate.balcony ? 'Yes' : 'No' }}</p>
-  </div>
-  <div mat-dialog-actions>
-    <button mat-button (click)="close()">Close</button>
-  </div>
 </mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="close()">Close</button>
+</mat-dialog-actions>

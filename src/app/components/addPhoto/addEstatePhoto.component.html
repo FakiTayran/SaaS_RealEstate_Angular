@@ -1,0 +1,13 @@
+<mat-dialog-content>
+  <h1 mat-dialog-title>Add Photos to {{ data.estate.headline }}</h1>
+  <ngx-dropzone (change)="onSelect($event)">
+    <ngx-dropzone-label>Drop files here or click to upload</ngx-dropzone-label>
+    <ngx-dropzone-image-preview *ngFor="let file of files" [file]="file" [removable]="true" (removed)="onRemove(file)">
+      <ngx-dropzone-label>{{ file.name }} ({{ file.type }})</ngx-dropzone-label>
+    </ngx-dropzone-image-preview>
+  </ngx-dropzone>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="save()">Save</button>
+  <button mat-raised-button (click)="close()">Cancel</button>
+</mat-dialog-actions>

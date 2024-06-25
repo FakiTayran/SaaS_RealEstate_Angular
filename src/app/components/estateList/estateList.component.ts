@@ -25,7 +25,13 @@ export class EstateListComponent implements OnInit {
   estateTypes = Object.values(EstateType).filter(value => typeof value === 'number');
   propertyTypes = Object.values(PropertyType).filter(value => typeof value === 'number');
 
-  constructor(private fb: FormBuilder, private estateService: EstateService, private estateAgentService: EstateAgentService, private snackBar: MatSnackBar, public dialog: MatDialog) {
+  constructor(
+    private fb: FormBuilder,
+    private estateService: EstateService,
+    private estateAgentService: EstateAgentService,
+    private snackBar: MatSnackBar,
+    public dialog: MatDialog
+  ) {
     this.filterForm = this.fb.group({
       searchText: [''],
       minPrice: [null],
@@ -90,7 +96,8 @@ export class EstateListComponent implements OnInit {
 
   viewDetails(estate: Estate) {
     this.dialog.open(DetailEstateComponent, {
-      width: '800px',
+      height:'auto',
+      width: '1200px',
       data: { estate }
     });
   }
@@ -113,8 +120,11 @@ export class EstateListComponent implements OnInit {
 
   deleteEstate(estate: Estate) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '400px',
-      data: { message: `Are you sure you want to delete the estate "${estate.headline}"?` }
+      width: '300px',
+      data: {
+        title: 'Confirm Delete',
+        message: `Are you sure you want to delete the estate "${estate.headline}"?`
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {

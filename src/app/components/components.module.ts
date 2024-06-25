@@ -16,16 +16,22 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { MatSnackBarModule } from '@angular/material/snack-bar'; // Add this line
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
-import { AddEstateComponent } from './addEstate/addEstate.component';
+
 import { EditEstateComponent } from './editEstate/editEstate.component';
 import { EstateListComponent } from './estateList/estateList.component';
-import { RegisterComponent } from './register/register.component';
-import { LoginComponent } from './login/login.component';
 import { DetailEstateComponent } from './detailEstate/detailEstate.component';
 import { SafePipe } from './safe.pipe';
 import { AddEstatePhotoComponent } from './addPhoto/addEstatePhoto.component';
 import { ConfirmDialogComponent } from './confirmDialog/confirmDialog.component';
+
+// Import standalone components
+import { AddEstateComponent } from './addEstate/addEstate.component';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
+
 
 @NgModule({
   declarations: [
@@ -54,23 +60,19 @@ import { ConfirmDialogComponent } from './confirmDialog/confirmDialog.component'
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    // Import standalone components
+    MatSnackBarModule,
     AddEstateComponent,
     RegisterComponent,
     LoginComponent,
-    
+    NgxDropzoneModule,
   ],
   providers: [CurrencyPipe],
   exports: [
-    // Export standalone components
-    AddEstateComponent,
-    RegisterComponent,
-    LoginComponent,
     EditEstateComponent,
     EstateListComponent,
     DetailEstateComponent,
     AddEstatePhotoComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
   ]
 })
 export class ComponentsModule { }

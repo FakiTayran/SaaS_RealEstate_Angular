@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable,throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Estate } from '../models/estate.model';
+import { catchError } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
@@ -59,11 +61,17 @@ export class EstateService {
     return this.http.get<Estate>(`${this.apiUrl}/GetEstateDetail/${estateId}`, { headers });
   }
 
-  addEstatePhotos(estateId: number, photos: FileList): Observable<any> {
+  
+
+  addEstatePhotos(estateId: number, formData: FormData): Observable<any> {
     const token = localStorage.getItem('access_token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    const formData = new FormData();
-    Array.from(photos).forEach(file => formData.append('imgs', file));
-    return this.http.post<any>(`${this.apiUrl}/AddEstatePhotos/${estateId}`, formData, { headers });
+    return this.http.post(`${this.apiUrl}/AddEstatePhotos/${estateId}`, formData, { responseType: 'text' ,headers})
+      .pipe(
+        catchError(error => {
+          console.error('Error occurred while uploading photos:', error);
+          return throwError(error);
+        })
+      );
   }
 }

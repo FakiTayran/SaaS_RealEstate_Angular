@@ -1,14 +1,12 @@
-.w-100 {
-    width: 100%;
+.mat-dialog-actions {
+    display: flex;
+    justify-content: flex-end;
   }
   
-  mat-dialog-content {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  mat-dialog-actions {
-    display: flex;
-    justify-content: space-between;
+  ngx-dropzone {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    border-radius: 4px;
+    text-align: center;
   }
   

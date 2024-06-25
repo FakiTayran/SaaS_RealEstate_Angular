@@ -17,6 +17,8 @@ import { DemoFlexyModule } from './demo-flexy-module';
 // Modules
 import { DashboardModule } from './dashboard/dashboard.module';
 import { ComponentsModule } from './components/components.module';
+import { NgxDropzoneModule } from 'ngx-dropzone';
+
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import { ComponentsModule } from './components/components.module';
     MatStepperModule,
     MatDialogModule,
     MatCardModule,
-    HttpClientModule 
+    HttpClientModule,
+    NgxDropzoneModule
   ],
   providers: [],
   bootstrap: [AppComponent]
