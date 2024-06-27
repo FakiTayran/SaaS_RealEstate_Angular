@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddEstateComponent } from './components/addEstate/addEstate.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { FullComponent } from './layouts/full/full.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -19,8 +18,8 @@ const routes: Routes = [
     component: FullComponent,
     canActivate: [AuthGuard], // FullComponent için AuthGuard ekleyin
     children: [
-      { path: '', redirectTo: '/home', pathMatch: 'full' },
-      { path: 'home', component: DashboardComponent },
+      { path: '', redirectTo: '/estateList', pathMatch: 'full' },
+      { path: 'home', redirectTo: '/estateList', pathMatch: 'full' },
       { path: 'addEstate', component: AddEstateComponent },
       { path: 'editEstate', component: EditEstateComponent },
       { path: 'estateList', component: EstateListComponent }, 

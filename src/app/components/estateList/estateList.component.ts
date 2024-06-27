@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { EstateService } from '../../services/estate.service';
 import { Estate, EstateType, PropertyType } from '../../models/estate.model';
 import { EstateAgentService } from '../../services/estateAgent.service'; 
@@ -24,6 +26,9 @@ export class EstateListComponent implements OnInit {
   estateAgents: EstateAgent[] = []; 
   estateTypes = Object.values(EstateType).filter(value => typeof value === 'number');
   propertyTypes = Object.values(PropertyType).filter(value => typeof value === 'number');
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
     private fb: FormBuilder,
@@ -55,6 +60,11 @@ export class EstateListComponent implements OnInit {
     this.getEstates();
   }
 
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
   getEstateAgents(): void {
     this.estateAgentService.getEstateAgents().subscribe(data => {
       this.estateAgents = data;
@@ -71,6 +81,8 @@ export class EstateListComponent implements OnInit {
 
     this.estateService.getAllEstates(filters).subscribe(data => {
       this.dataSource.data = data;
+      this.dataSource.paginator = this.paginator; // Pagination ayarları
+      this.dataSource.sort = this.sort; // Sort ayarları
     });
   }
 
@@ -96,7 +108,7 @@ export class EstateListComponent implements OnInit {
 
   viewDetails(estate: Estate) {
     this.dialog.open(DetailEstateComponent, {
-      height:'auto',
+      height: 'auto',
       width: '1200px',
       data: { estate }
     });

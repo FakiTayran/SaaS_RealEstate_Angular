@@ -59,18 +59,13 @@ export class FullComponent implements OnInit {
 
   sidebarMenu: sidebarMenu[] = [
     {
-      link: "/home",
-      icon: "home",
-      menu: "Dashboard",
-    },
-    {
       link: "/addEstate",
       icon: "plus",
       menu: "Add New Estate",
     },
     {
       link: "/estateList",
-      icon: "list",
+      icon: "home",
       menu: "Estate List",
     },
     {
