@@ -1,0 +1,33 @@
+.mat-dialog-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .mat-dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  
+  .w-100 {
+    width: 100%;
+  }
+  
+  .uploaded-photo {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+  }
+  
+  .profile-picture-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .profile-picture-container label {
+    margin-bottom: 5px;
+  }
+  

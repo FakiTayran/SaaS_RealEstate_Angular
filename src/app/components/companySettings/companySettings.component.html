@@ -1,0 +1,26 @@
+<mat-dialog-content>
+    <h1 mat-dialog-title>Company Settings</h1>
+    <form [formGroup]="companySettingsForm">
+      <mat-form-field class="w-100">
+        <mat-label>Company Name</mat-label>
+        <input matInput formControlName="companyName" type="text">
+      </mat-form-field>
+  
+      <div class="profile-picture-container">
+        <label>Current Company Icon</label>
+        <img *ngIf="companyIcon" [src]="'data:image/jpeg;base64,' + companyIcon" class="uploaded-photo">
+      </div>
+  
+      <ngx-dropzone (change)="onSelect($event)" [multiple]="false">
+        <ngx-dropzone-label>Drop company icon here or click to upload</ngx-dropzone-label>
+        <ngx-dropzone-image-preview *ngIf="file" [file]="file" [removable]="true" (removed)="onRemove()">
+          <ngx-dropzone-label>{{ file?.name }} ({{ file?.type }})</ngx-dropzone-label>
+        </ngx-dropzone-image-preview>
+      </ngx-dropzone>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button color="primary" (click)="save()">Save</button>
+    <button mat-raised-button (click)="close()">Cancel</button>
+  </mat-dialog-actions>
+  

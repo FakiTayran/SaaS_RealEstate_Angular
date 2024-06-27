@@ -41,6 +41,8 @@ export class LoginComponent {
         localStorage.setItem("company_icon",response.companyIcon);
         localStorage.setItem("user_name",response.userName);
         localStorage.setItem("user_pp",response.userPP);
+        localStorage.setItem("name",response.name);
+        localStorage.setItem("surname",response.surname);
         this.router.navigate(['/home']); // Yönlendirme işlemi
       },
       (error) => {

@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { EditProfileComponent } from 'src/app/components/editProfile/editProfile.component'; 
+import { ChangePasswordComponent } from 'src/app/components/changePassword/changePassword.component';
+import { CompanySettingsComponent } from 'src/app/components/companySettings/companySettings.component';
+import { Router } from '@angular/router';
 
 interface sidebarMenu {
   link: string;
@@ -28,19 +34,24 @@ export class FullComponent implements OnInit {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver) { }
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.companyName = localStorage.getItem('company_name');
     const icon = localStorage.getItem('company_icon');
     if (icon) {
-      this.companyIcon = 'data:image/png;base64,' + icon; // Base64 olarak ikon verisini kullan
+      this.companyIcon = icon; // Base64 olarak ikon verisini kullan
     }
 
     this.userName = localStorage.getItem('user_name');
     const userPP = localStorage.getItem('user_pp');
     if (userPP) {
-      this.userPP = 'data:image/png;base64,' + userPP; // Base64 olarak kullanıcı profil resmini kullan
+      this.userPP = userPP; // Base64 olarak kullanıcı profil resmini kullan
     }
   }
 
@@ -72,7 +83,65 @@ export class FullComponent implements OnInit {
       icon: "list",
       menu: "Estate Agent List",
     },
-    
-  ]
+  ];
 
+  openEditProfile(): void {
+    const dialogRef = this.dialog.open(EditProfileComponent, {
+      width: '400px',
+      data: {
+        user: {
+          name: this.userName,
+          email: localStorage.getItem('user_email'),
+          surname: localStorage.getItem('user_surname')
+        }
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.snackBar.open('Profile updated successfully', 'Close', { duration: 3000 });
+      } else if (result === false) {
+        this.snackBar.open('Error updating profile', 'Close', { duration: 3000 });
+      }
+    });
+  }
+
+  openChangePassword(): void {
+    const dialogRef = this.dialog.open(ChangePasswordComponent, {
+      width: '400px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.snackBar.open('Password changed successfully', 'Close', { duration: 3000 });
+      } else if (result === false) {
+        this.snackBar.open('Error changing password', 'Close', { duration: 3000 });
+      }
+    });
+  }
+
+  openCompanySettings(): void {
+    const dialogRef = this.dialog.open(CompanySettingsComponent, {
+      width: '400px',
+      data: {
+        companyName: this.companyName,
+        companyIcon: this.companyIcon
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.snackBar.open('Company settings updated successfully', 'Close', { duration: 3000 });
+      } else if (result === false) {
+        this.snackBar.open('Error updating company settings', 'Close', { duration: 3000 });
+      }
+    });
+  }
+
+  logout(): void {
+    // Logout logic
+    localStorage.clear();
+    this.router.navigate(['/login']);
+    this.snackBar.open('Logged out successfully', 'Close', { duration: 3000 });
+  }
 }

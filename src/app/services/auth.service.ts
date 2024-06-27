@@ -15,7 +15,7 @@ export class AuthService {
   isAuthorized(): Observable<boolean> {
     const token = localStorage.getItem('access_token');
     if (!token) {
-      return of(false); // Token yoksa false döner
+      return of(false); 
     }
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.get<any>(`${this.apiUrl}/Account/IsAuthorize`, { headers, observe: 'response' }).pipe(

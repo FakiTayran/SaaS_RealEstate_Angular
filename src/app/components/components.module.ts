@@ -16,9 +16,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import { MatSnackBarModule } from '@angular/material/snack-bar'; // Add this line
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NgxDropzoneModule } from 'ngx-dropzone';
-
 
 import { EditEstateComponent } from './editEstate/editEstate.component';
 import { EstateListComponent } from './estateList/estateList.component';
@@ -26,6 +25,9 @@ import { DetailEstateComponent } from './detailEstate/detailEstate.component';
 import { SafePipe } from './safe.pipe';
 import { AddEstatePhotoComponent } from './addPhoto/addEstatePhoto.component';
 import { ConfirmDialogComponent } from './confirmDialog/confirmDialog.component';
+import { ChangePasswordComponent } from './changePassword/changePassword.component';
+import { EditProfileComponent } from './editProfile/editProfile.component';
+import { CompanySettingsComponent } from './companySettings/companySettings.component';
 
 // Import standalone components
 import { AddEstateComponent } from './addEstate/addEstate.component';
@@ -33,7 +35,6 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { AddEstateAgentComponent } from './addEstateAgent/addEstateAgent.component';
 import { EstateAgentListComponent } from './estateAgentList/estateAgentList.component';
-
 
 @NgModule({
   declarations: [
@@ -45,6 +46,9 @@ import { EstateAgentListComponent } from './estateAgentList/estateAgentList.comp
     EstateAgentListComponent,
     SafePipe,
     ConfirmDialogComponent,
+    ChangePasswordComponent,
+    EditProfileComponent,
+    CompanySettingsComponent,
   ],
   imports: [
     CommonModule,
@@ -65,10 +69,11 @@ import { EstateAgentListComponent } from './estateAgentList/estateAgentList.comp
     MatPaginatorModule,
     MatSortModule,
     MatSnackBarModule,
+    NgxDropzoneModule,
+    // Import standalone components
     AddEstateComponent,
     RegisterComponent,
     LoginComponent,
-    NgxDropzoneModule,
   ],
   providers: [CurrencyPipe],
   exports: [
@@ -78,6 +83,9 @@ import { EstateAgentListComponent } from './estateAgentList/estateAgentList.comp
     AddEstatePhotoComponent,
     ConfirmDialogComponent,
     EstateAgentListComponent,
+    ChangePasswordComponent,
+    EditProfileComponent,
+    CompanySettingsComponent,
   ]
 })
 export class ComponentsModule { }
