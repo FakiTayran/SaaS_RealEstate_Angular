@@ -25,6 +25,9 @@ export class FullComponent implements OnInit {
   companyIcon: string | null = '';
   userName: string | null = '';
   userPP: string | null = '';
+  name: string | null = '';
+  surname: string | null = '';
+
 
   search: boolean = false;
 
@@ -49,6 +52,8 @@ export class FullComponent implements OnInit {
     }
 
     this.userName = localStorage.getItem('user_name');
+    this.name = localStorage.getItem('name');
+    this.surname = localStorage.getItem('surname');
     const userPP = localStorage.getItem('user_pp');
     if (userPP) {
       this.userPP = userPP; // Base64 olarak kullanıcı profil resmini kullan

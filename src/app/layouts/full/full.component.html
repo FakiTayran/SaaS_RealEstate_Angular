@@ -40,7 +40,7 @@
           <div class="d-flex align-items-center">
             <img [src]="userPP ? 'data:image/jpeg;base64,' + userPP : 'assets/images/user2.png'" class="rounded-circle" alt="User Image" width="32" height="32">
             <span class="fw-light ms-8 text-secondary">Hi,</span>
-            <span class="fw-bold ms-8">{{ userName ? userName.split('@')[0] : 'User' }}</span>
+            <span class="fw-bold ms-8">{{ name ? name : 'User' }}</span>
             <i-feather name="chevron-down" class="feather-base"></i-feather>
           </div>
         </button>
