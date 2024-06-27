@@ -39,7 +39,6 @@ export class AddEstatePhotoComponent implements OnInit {
   }
 
   removePhoto(photoId: number, index: number): void {
-    console.log(photoId)
     this.estateService.deleteEstatePhoto(photoId).subscribe(
       () => {
         this.data.estate.estatePictures.splice(index, 1);

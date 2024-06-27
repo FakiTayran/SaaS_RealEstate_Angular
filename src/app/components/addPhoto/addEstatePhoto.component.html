@@ -1,13 +1,11 @@
 <mat-dialog-content>
-  <h1 mat-dialog-title>Add Photos to {{ data.estate.headline }} or Delete</h1>
-  <form [formGroup]="addPhotoForm">
-    <ngx-dropzone (change)="onSelect($event)">
-      <ngx-dropzone-label>Drop files here or click to upload</ngx-dropzone-label>
-      <ngx-dropzone-preview *ngFor="let file of files" [file]="file" [removable]="true" (removed)="onRemove(file)">
-        <ngx-dropzone-label>{{ file.name }} ({{ file.type }})</ngx-dropzone-label>
-      </ngx-dropzone-preview>
-    </ngx-dropzone>
-  </form>
+  <h1 mat-dialog-title>Add Photos to {{ data.estate.headline }}</h1>
+  <ngx-dropzone (change)="onSelect($event)">
+    <ngx-dropzone-label>Drop files here or click to upload</ngx-dropzone-label>
+    <ngx-dropzone-image-preview *ngFor="let file of files" [file]="file" [removable]="true" (removed)="onRemove(file)">
+      <ngx-dropzone-label>{{ file.name }} ({{ file.type }})</ngx-dropzone-label>
+    </ngx-dropzone-image-preview>
+  </ngx-dropzone>
   <div class="uploaded-photos">
     <div class="photo-container" *ngFor="let photo of data.estate.estatePictures; let i = index">
       <img [src]="'data:image/jpeg;base64,' + photo.img" class="uploaded-photo">
