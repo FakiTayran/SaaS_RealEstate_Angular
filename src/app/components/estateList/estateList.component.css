@@ -15,5 +15,15 @@
     display: flex;
     flex-direction: column;
   }
- 
+  .actions-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Creates two equal columns */
+    gap: 8px; /* Adjust the gap as needed */
+  }
+  
+  .actions-container button {
+    width: 100%; /* Ensures buttons take full width of the grid cell */
+  }
+  
+  
   
