@@ -1,5 +1,5 @@
 export const environment = {
     production: false,
-    apiUrl: 'https://localhost:7070'
+    apiUrl: 'http://myrealestateapi.uksouth.azurecontainer.io'
   };
   
