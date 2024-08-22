@@ -20,7 +20,7 @@ import { ConfirmDialogComponent } from '../confirmDialog/confirmDialog.component
   styleUrls: ['./estateList.component.css']
 })
 export class EstateListComponent implements OnInit {
-  displayedColumns: string[] = ['headline', 'price', 'squareMeter', 'numberOfBedRooms', 'numberOfBathRooms', 'city', 'actions'];
+  displayedColumns: string[] = ['saleLink','headline', 'price', 'squareMeter', 'numberOfBedRooms', 'numberOfBathRooms', 'city', 'actions'];
   dataSource = new MatTableDataSource<Estate>();
   filterForm: FormGroup;
   estateAgents: EstateAgent[] = []; 
@@ -80,6 +80,7 @@ export class EstateListComponent implements OnInit {
     });
 
     this.estateService.getAllEstates(filters).subscribe(data => {
+      console.log(data)
       this.dataSource.data = data;
       this.dataSource.paginator = this.paginator; // Pagination ayarları
       this.dataSource.sort = this.sort; // Sort ayarları
@@ -157,5 +158,9 @@ export class EstateListComponent implements OnInit {
 
   formatSquareMeterLabel(value: number): string {
     return `${value} m²`;
+  }
+
+  encodeURIComponent(value: string): string {
+    return encodeURIComponent(value);
   }
 }

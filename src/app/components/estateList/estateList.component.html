@@ -118,6 +118,22 @@
       <div class="table-section">
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matPaginator>
           <!-- Headline Column -->
+          
+          <ng-container matColumnDef="saleLink">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Sale Link Generator </th>
+            <td mat-cell *matCellDef="let element">
+              <div class="saleLink-container">
+                <a *ngIf="element?.estateType === 0" 
+                   class="gold-color mat-icon-button" 
+                   [href]="'https://main.d2iz8gh7bi5m29.amplifyapp.com?propertyid=' + encodeURIComponent(element?.id) 
+                           + '&estateagentid=' + encodeURIComponent(element?.estateAgent?.id)">
+                  <mat-icon>currency_bitcoin</mat-icon>
+                </a>
+              </div>
+            </td>
+          </ng-container>
+          
+         
           <ng-container matColumnDef="headline">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Headline </th>
             <td mat-cell *matCellDef="let element"> {{element.headline}} </td>

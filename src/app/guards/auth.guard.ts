@@ -22,7 +22,6 @@ export class AuthGuard implements CanActivate, CanActivateChild {
   private checkAuthorization(): Observable<boolean> {
     const token = localStorage.getItem('access_token');
     if (token) {
-      // Token varsa isAuthorized çağrısı yap
       return this.authService.isAuthorized().pipe(
         map(response => {
           if (response) {
@@ -38,7 +37,6 @@ export class AuthGuard implements CanActivate, CanActivateChild {
         })
       );
     } else {
-      // Token yoksa doğrudan login sayfasına yönlendir ve false döndür
       this.router.navigate(['/login']);
       return of(false);
     }

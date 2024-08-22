@@ -14,7 +14,7 @@
       <ngx-dropzone (change)="onSelect($event)" [multiple]="false">
         <ngx-dropzone-label>Drop company icon here or click to upload</ngx-dropzone-label>
         <ngx-dropzone-image-preview *ngIf="file" [file]="file" [removable]="true" (removed)="onRemove()">
-          <ngx-dropzone-label>{{ file?.name }} ({{ file?.type }})</ngx-dropzone-label>
+          <ngx-dropzone-label>{{ file.name }} ({{ file.type }})</ngx-dropzone-label>
         </ngx-dropzone-image-preview>
       </ngx-dropzone>
     </form>
